@@ -2,10 +2,8 @@
 #define TETRIS_HPP
 
 #include "States.hpp"
-#include <SFML/Graphics/Drawable.hpp>
-#include "Event/EventListener.hpp"
 
-class Tetris : public sf::Drawable,public EventListener,public GameState{
+class Tetris : public GameState{
 // singleton pattern
 private:
     Tetris();
