@@ -1,6 +1,8 @@
 #include "Game.hpp"
 #include "Tetris.hpp"
 
+#include <fstream>
+
 
 Game *Game::_instance = nullptr;
 
@@ -10,9 +12,14 @@ Game::Game()
     ,prevgamestate(State::Menu)
     ,background_color(sf::Color::Green)
 {
-    sf::Image icon;
-    if(icon.loadFromFile("icon.png"))
-        window.setIcon(32,32,icon.getPixelsPtr());
+    std::ifstream file;
+    file.open("icon.png");
+    if(file){
+        sf::Image icon;
+        if(icon.loadFromFile("icon.png"))
+            window.setIcon(32,32,icon.getPixelsPtr());
+        file.close();
+    }
     window.setKeyRepeatEnabled(false);
 }
 
