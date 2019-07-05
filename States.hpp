@@ -14,6 +14,8 @@ protected:
     void setPreviousState() const;
     State getState() const;
     State getPreviousState() const;
+    float getWindowWidth() const;
+    float getWindowHeight() const;
 };
 
 #endif // !STATES_HPP

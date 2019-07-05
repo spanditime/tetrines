@@ -31,6 +31,8 @@ private:
     void setPreviousState();
     State getState();
     State getPreviousState();
+    float getWindowWidth();
+    float getWindowHeight();
 
 
     bool running;
@@ -40,6 +42,7 @@ private:
     
 
     sf::RenderWindow window;
+    float window_width,window_height;
     sf::Color background_color;
 };
 

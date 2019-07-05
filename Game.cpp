@@ -3,15 +3,19 @@
 
 #include <fstream>
 
+#define WINHEIGHT 800
+#define WINWIDTH 600
 
 Game *Game::_instance = nullptr;
 
 Game::Game()
-    :window(sf::VideoMode(600,800),"TETRINES",sf::Style::Default)
+    :window(sf::VideoMode(WINWIDTH,WINHEIGHT),"TETRINES",sf::Style::Default)
     ,gamestate(State::Game)
     ,prevgamestate(State::Menu)
     ,background_color(sf::Color::Green)
 {
+    window_width = WINWIDTH;
+    window_height = WINHEIGHT;
     std::ifstream file;
     file.open("icon.png");
     if(file){
@@ -56,7 +60,7 @@ void Game::update(){
 
             break;
         case State::Game:
-            
+            Tetris::getInstance()->update(collapsed_time);
             break;
         case State::Pause:
             
@@ -73,7 +77,7 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const{
 
             break;
         case State::Game:
-            
+            target.draw(*Tetris::getInstance());
             break;
         case State::Pause:
             
@@ -103,3 +107,10 @@ State Game::getPreviousState(){
     return prevgamestate;
 }
 
+float Game::getWindowWidth(){
+    return window_width;
+}
+
+float Game::getWindowHeight(){
+    return window_height;
+}

@@ -16,3 +16,11 @@ State GameState::getState() const{
 State GameState::getPreviousState() const{
     return Game::getInstance()->getPreviousState();
 }
+
+float GameState::getWindowWidth() const{
+    return Game::getInstance()->getWindowWidth();
+}
+
+float GameState::getWindowHeight() const{
+    return Game::getInstance()->getWindowHeight();
+}
