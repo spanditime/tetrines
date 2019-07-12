@@ -24,3 +24,7 @@ float GameState::getWindowWidth() const{
 float GameState::getWindowHeight() const{
     return Game::getInstance()->getWindowHeight();
 }
+
+void GameState::handleEvent(sf::Event e){
+    
+}
