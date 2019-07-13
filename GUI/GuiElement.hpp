@@ -8,9 +8,17 @@ class GUI;
 class GuiElement{
 public:
     void setPosX(float value, bool in_percent = false);
+    float getPosX() const;
+    bool getPosXp() const;
     void setPosY(float value, bool in_percent = false);
+    float getPosY() const;
+    bool getPosYp() const;
     void setWidth(float value, bool in_percent = false);
+    float getWidth() const;
+    bool getWidthp() const;
     void setHeight(float value, bool in_percent = false);
+    float getHeight() const;
+    bool getHeightp() const;
     bool isFocused();
 
 private:
