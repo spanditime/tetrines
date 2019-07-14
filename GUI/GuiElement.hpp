@@ -43,6 +43,7 @@ private:
     virtual bool rightArrow();
     virtual void plus();
     virtual void minus();
+    virtual void mouseWheelScrolled(float d);
 
     bool focused;
     bool hover;

@@ -85,3 +85,4 @@ bool GuiElement::leftArrow(){return false;}
 bool GuiElement::rightArrow(){return false;}
 void GuiElement::plus(){}
 void GuiElement::minus(){}
+void GuiElement::mouseWheelScrolled(float d){}
