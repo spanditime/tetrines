@@ -1,7 +1,8 @@
 
 EVENTSRC = Event/EventDispatcher.cpp Event/EventListener.cpp 
+GUISRC = GUI/Gui.cpp GUI/GuiElement.cpp
 
-SRC = main.cpp Game.cpp Tetris.cpp States.cpp $(EVENTSRC)
+SRC = main.cpp Game.cpp Tetris.cpp States.cpp $(EVENTSRC) $(GUISRC)
 OBJ = $(SRC:.cpp=.o)
 NAME = Tetrines
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
