@@ -49,26 +49,26 @@ bool GuiElement::getHeightp() const{
     return in_perc.height;
 }
 
-void GuiElement::_draw(const sf::FloatRect& p,sf::RenderTarget& target, sf::RenderStates states) const{
-    draw(getRect(p),target,states);
+void GuiElement::_draw(sf::RenderTarget& target, sf::RenderStates states) const{
+    draw(target,states);
 }
 
 
-sf::FloatRect GuiElement::getRect(const sf::FloatRect& p) const{
-    sf::FloatRect out = rect;
+sf::FloatRect GuiElement::evaluateRect(const sf::FloatRect& p){
+    eval = rect;
     if(in_perc.left){
-        out.left = (p.left/100.f)*rect.left;
+        eval.left = (p.left/100.f)*rect.left;
     }
     if(in_perc.top){
-        out.top = (p.top/100.f)*rect.top;
+        eval.top = (p.top/100.f)*rect.top;
     }
     if(in_perc.width){
-        out.width = (p.width/100.f)*rect.width;
+        eval.width = (p.width/100.f)*rect.width;
     }
     if(in_perc.height){
-        out.height = (p.height/100.f)*rect.height;
+        eval.height = (p.height/100.f)*rect.height;
     }
-    return out;
+    return eval;
 }
 
 bool GuiElement::mouseHovered(){
@@ -83,11 +83,15 @@ bool GuiElement::isMousePressed(){
     return mouse_pressed;
 }
 
+sf::FloatRect GuiElement::getRect() const{
+    return eval;
+}
+
 void GuiElement::onHover(){}
 void GuiElement::onMouseLeave(){}
-void GuiElement::mouseMoved(const sf::FloatRect& r,float x, float y){}
-bool GuiElement::mousePressed(const sf::FloatRect& r,float x, float y,sf::Mouse::Button b){return false;}
-bool GuiElement::mouseReleased(const sf::FloatRect& r,float x, float y,sf::Mouse::Button b){return false;}
+void GuiElement::mouseMoved(float x, float y){}
+bool GuiElement::mousePressed(float x, float y,sf::Mouse::Button b){return false;}
+bool GuiElement::mouseReleased(float x, float y,sf::Mouse::Button b){return false;}
 bool GuiElement::canHaveFocus() const{return false;}
 void GuiElement::onFocus(){}
 void GuiElement::lostFocus(){}

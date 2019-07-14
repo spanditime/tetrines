@@ -50,18 +50,27 @@ void GUI::deleteElement(GuiElement* e){
 
 void GUI::draw(sf::RenderTarget& target, sf::RenderStates states) const{
     for(auto element : childs){
-        element->_draw(field,target,states);
+        element->_draw(target,states);
     }
 }
 
 void GUI::handleEvent(sf::Event e){
+    if(e.type != sf::Event::EventType::Resized)
+        for(auto element : childs){
+            if(element->autoHandling()){
+                element->handleEvent(e);
+            }
+        }
     switch(e.type){
     case sf::Event::EventType::Resized:
         field = resize_handler(e.size.width,e.size.height);
+        for(auto element : childs){
+            element->evaluateRect(field);
+        }
         break;
     case sf::Event::EventType::MouseMoved:
         for(auto element : childs){
-            sf::FloatRect r = element->getRect(field);
+            sf::FloatRect r = element->getRect();
             r.left = e.mouseMove.x - r.left;
             r.top = e.mouseMove.y - r.top;
             if(r.left<=r.width&&r.left>=0&&r.top<=r.height&&r.top>=0){
@@ -69,7 +78,7 @@ void GUI::handleEvent(sf::Event e){
                     element->hover = true;
                     element->onHover();
                 }
-                element->mouseMoved(element->getRect(field),e.mouseMove.x,e.mouseMove.y);
+                element->mouseMoved(e.mouseMove.x,e.mouseMove.y);
                 break;
             } else if(element->hover){
                 element->hover = false;
@@ -81,7 +90,7 @@ void GUI::handleEvent(sf::Event e){
     case sf::Event::EventType::MouseButtonPressed:
         for(auto element : childs){
             if(element->hover){
-                element->mouse_pressed = element->mousePressed(element->getRect(field),e.mouseButton.x,e.mouseButton.y,e.mouseButton.button);
+                element->mouse_pressed = element->mousePressed(e.mouseButton.x,e.mouseButton.y,e.mouseButton.button);
                 break;
             }
         }
@@ -89,7 +98,7 @@ void GUI::handleEvent(sf::Event e){
     case sf::Event::EventType::MouseButtonReleased:
         for(auto element : childs){
             if(element->mouse_pressed){
-                element->mouse_pressed = element->mouseReleased(element->getRect(field),e.mouseButton.x,e.mouseButton.y,e.mouseButton.button);
+                element->mouse_pressed = element->mouseReleased(e.mouseButton.x,e.mouseButton.y,e.mouseButton.button);
                 break;
             }
         }
