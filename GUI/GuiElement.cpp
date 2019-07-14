@@ -71,9 +71,12 @@ sf::FloatRect GuiElement::getRect(const sf::FloatRect& p) const{
     return out;
 }
 
+bool GuiElement::mouseHovered(){
+    return hover;
+}
+
 void GuiElement::onHover(){}
 void GuiElement::onMouseLeave(){}
-void GuiElement::mouseHovered(){}
 void GuiElement::mouseMoved(const sf::FloatRect& r,float x, float y){}
 void GuiElement::mousePressed(const sf::FloatRect& r,float x, float y,sf::Mouse::Button b){}
 bool GuiElement::mouseReleased(const sf::FloatRect& r,float x, float y,sf::Mouse::Button b){return false;}

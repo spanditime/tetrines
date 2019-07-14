@@ -28,9 +28,10 @@ private:
     virtual void draw(const sf::FloatRect& p,sf::RenderTarget& target, sf::RenderStates states) const = 0;
     virtual void update(float collapsed_time)=0;
     
+    bool mouseHovered();
+    
     virtual void onHover();
     virtual void onMouseLeave();
-    virtual void mouseHovered();
     virtual void mouseMoved(const sf::FloatRect& r,float x, float y);
     virtual void mousePressed(const sf::FloatRect& r,float x, float y,sf::Mouse::Button b);
     virtual bool mouseReleased(const sf::FloatRect& r,float x, float y,sf::Mouse::Button b);
