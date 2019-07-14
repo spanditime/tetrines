@@ -14,7 +14,7 @@ build: $(OBJ)
 	g++ -Wall $(OBJ) -L$(LIBPATH) $(LIBS) -o $(NAME)
 
 .cpp.o:
-	g++ -c $< -o $@
+	g++ -c -Wall -I./ $< -o $@
 
 rmo:
 	find ./ -name "*.o" | xargs rm
