@@ -75,6 +75,14 @@ bool GuiElement::mouseHovered(){
     return hover;
 }
 
+bool GuiElement::isFocused(){
+    return focused;
+}
+
+bool GuiElement::isMousePressed(){
+    return mouse_pressed;
+}
+
 void GuiElement::onHover(){}
 void GuiElement::onMouseLeave(){}
 void GuiElement::mouseMoved(const sf::FloatRect& r,float x, float y){}
