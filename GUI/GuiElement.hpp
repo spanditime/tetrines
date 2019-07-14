@@ -33,7 +33,7 @@ private:
     virtual void onHover();
     virtual void onMouseLeave();
     virtual void mouseMoved(const sf::FloatRect& r,float x, float y);
-    virtual void mousePressed(const sf::FloatRect& r,float x, float y,sf::Mouse::Button b);
+    virtual bool mousePressed(const sf::FloatRect& r,float x, float y,sf::Mouse::Button b);
     virtual bool mouseReleased(const sf::FloatRect& r,float x, float y,sf::Mouse::Button b);
 
     virtual bool canHaveFocus() const;

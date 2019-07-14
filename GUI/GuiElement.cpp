@@ -78,7 +78,7 @@ bool GuiElement::mouseHovered(){
 void GuiElement::onHover(){}
 void GuiElement::onMouseLeave(){}
 void GuiElement::mouseMoved(const sf::FloatRect& r,float x, float y){}
-void GuiElement::mousePressed(const sf::FloatRect& r,float x, float y,sf::Mouse::Button b){}
+bool GuiElement::mousePressed(const sf::FloatRect& r,float x, float y,sf::Mouse::Button b){return false;}
 bool GuiElement::mouseReleased(const sf::FloatRect& r,float x, float y,sf::Mouse::Button b){return false;}
 bool GuiElement::canHaveFocus() const{return false;}
 void GuiElement::onFocus(){}

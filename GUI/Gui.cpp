@@ -81,8 +81,7 @@ void GUI::handleEvent(sf::Event e){
     case sf::Event::EventType::MouseButtonPressed:
         for(auto element : childs){
             if(element->hover){
-                element->mousePressed(element->getRect(field),e.mouseButton.x,e.mouseButton.y,e.mouseButton.button);
-                element->mouse_pressed = true;
+                element->mouse_pressed = element->mousePressed(element->getRect(field),e.mouseButton.x,e.mouseButton.y,e.mouseButton.button);
                 break;
             }
         }
