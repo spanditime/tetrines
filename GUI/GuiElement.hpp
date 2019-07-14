@@ -20,18 +20,15 @@ public:
     void setHeight(float value, bool in_percent = false);
     float getHeight() const;
     bool getHeightp() const;
+    bool mouseHovered();
     bool isFocused();
+    bool isMousePressed();
 
 private:
     friend class GUI;
     void _draw(const sf::FloatRect& p,sf::RenderTarget& target, sf::RenderStates states) const;
     virtual void draw(const sf::FloatRect& p,sf::RenderTarget& target, sf::RenderStates states) const = 0;
     virtual void update(float collapsed_time)=0;
-    
-protected:
-    bool mouseHovered();
-    bool isFocused();
-    bool isMousePressed();
     
 private:
     virtual void onHover();
