@@ -7,6 +7,7 @@ sf::FloatRect defaultResizeHandlerForGUI(float w,float h){
 GUI::GUI(float w,float h){
     resize_handler = defaultResizeHandlerForGUI;
     field = resize_handler(w,h);
+    focused = nullptr;
 }
 
 GUI::GUI(float w,float h,sf::FloatRect (*resize_handler)(float w,float h)){
@@ -89,10 +90,23 @@ void GUI::handleEvent(sf::Event e){
         }
         break;
     case sf::Event::EventType::MouseButtonPressed:
-        for(auto element : childs){
-            if(element->hover){
-                element->mouse_pressed = element->mousePressed(e.mouseButton.x,e.mouseButton.y,e.mouseButton.button);
-                break;
+        if(true){
+            bool res=false;
+            for(auto element : childs){
+                if(res |= element->hover){
+                    element->mouse_pressed = element->mousePressed(e.mouseButton.x,e.mouseButton.y,e.mouseButton.button);
+                    if(element != focused && focused != nullptr){
+                        focused->focused = false;
+                        focused->lostFocus();
+                        focused = nullptr;
+                    }else
+                        break;
+                }
+            }
+            if(!res && focused != nullptr){
+                focused->focused = false;
+                focused->lostFocus();
+                focused = nullptr;
             }
         }
         break;
@@ -148,6 +162,7 @@ void GUI::handleEvent(sf::Event e){
                         focused = *f;
                         focused->focused = true;
                         focused->onFocus();
+                        break;
                     }
                 }
                 break;
@@ -170,7 +185,10 @@ void GUI::handleEvent(sf::Event e){
                 }
                 break;
             case sf::Keyboard::Key::End:
-                for(auto f = childs.end()--;f != it;f--){
+                for(auto f = childs.end();;){
+                    f--;
+                    if(f == it)
+                        break;
                     if((*f)->canHaveFocus()){
                         if(focused != nullptr){
                             focused->focused = false;
@@ -180,6 +198,7 @@ void GUI::handleEvent(sf::Event e){
                         focused = *f;
                         focused->focused = true;
                         focused->onFocus();
+                        break;
                     }
                 }
                 break;
