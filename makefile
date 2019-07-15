@@ -5,7 +5,7 @@ GUISRC = GUI/Gui.cpp GUI/GuiElement.cpp $(GUIESRC)
 
 FSMSRC= Tetris.cpp Menu.cpp
 
-SRC = main.cpp Game.cpp States.cpp $(FSMSRC) $(EVENTSRC) $(GUISRC)
+SRC = main.cpp Game.cpp States.cpp Style.cpp $(FSMSRC) $(EVENTSRC) $(GUISRC)
 OBJ = $(SRC:.cpp=.o)	
 NAME = Tetrines
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
