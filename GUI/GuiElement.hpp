@@ -53,11 +53,11 @@ private:
     virtual void minus();
     virtual void mouseWheelScrolled(float d);
 
-    bool focused;
-    bool hover;
-    bool mouse_pressed;
+    bool focused = false;
+    bool hover = false;
+    bool mouse_pressed = false;
 
-    GUI *parrent;
+    GUI *parrent = nullptr;
 
     sf::FloatRect evaluateRect(const sf::FloatRect& p);
 
