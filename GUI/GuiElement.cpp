@@ -57,16 +57,16 @@ void GuiElement::_draw(sf::RenderTarget& target, sf::RenderStates states) const{
 sf::FloatRect GuiElement::evaluateRect(const sf::FloatRect& p){
     eval = rect;
     if(in_perc.left){
-        eval.left = (p.left/100.f)*rect.left;
+        eval.left = (rect.left/100.f)*p.width;
     }
     if(in_perc.top){
-        eval.top = (p.top/100.f)*rect.top;
+        eval.top = (rect.top/100.f)*p.height;
     }
     if(in_perc.width){
-        eval.width = (p.width/100.f)*rect.width;
+        eval.width = (rect.width/100.f)*p.width;
     }
     if(in_perc.height){
-        eval.height = (p.height/100.f)*rect.height;
+        eval.height = (rect.height/100.f)*p.height;
     }
     return eval;
 }
