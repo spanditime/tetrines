@@ -17,6 +17,7 @@ public:
     void setBackgroundColor(sf::Color color);
     void setFillColor(sf::Color color);
     void setText(std::string str);
+    void setCircleMoveSpeed(float speed=3.f);
 
 private:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -36,6 +37,7 @@ private:
     sf::Color background_color, fill_color;
     sf::Vector2f circle;
     sf::Vector2f circle_m;
+    float circle_m_speed;
     float circle_size;
     bool entered;
     void (*button_action)();

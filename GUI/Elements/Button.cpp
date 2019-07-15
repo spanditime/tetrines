@@ -12,6 +12,7 @@ Button::Button(){
     circle_size = 0;
     circle = {0.5f,0.5f};
     circle_m = {0.5f,0.5f};
+    circle_m_speed = 3.f;
     entered = false;
 }
 
@@ -32,6 +33,11 @@ void Button::setFillColor(sf::Color color){
 
 void Button::setText(std::string str){
     
+}
+
+void Button::setCircleMoveSpeed(float speed){
+    if(speed>0.1f)
+        circle_m_speed = speed;
 }
 
 float evaluatLength(float x,float y){
@@ -60,8 +66,8 @@ void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const{
 }
 
 void Button::update(float collapsed_time){
-    circle.x += (circle_m.x-circle.x)*collapsed_time*10;
-    circle.y += (circle_m.y-circle.y)*collapsed_time*10;
+    circle.x += (circle_m.x-circle.x)*collapsed_time*circle_m_speed;
+    circle.y += (circle_m.y-circle.y)*collapsed_time*circle_m_speed;
     if((isMousePressed()||entered)&&circle_size>=0.5f&&circle_size<2.f){
         circle_size = std::sqrt((circle_size-0.5f)/1.5f);
         circle_size += (collapsed_time*2.f);
