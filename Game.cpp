@@ -1,5 +1,7 @@
 #include "Game.hpp"
 #include "Tetris.hpp"
+#include "Menu.hpp"
+#include "Event/EventDispatcher.hpp"
 
 #include <fstream>
 
@@ -10,7 +12,7 @@ Game *Game::_instance = nullptr;
 
 Game::Game()
     :window(sf::VideoMode(WINWIDTH,WINHEIGHT),"TETRINES",sf::Style::Default)
-    ,gamestate(State::Game)
+    ,gamestate(State::Menu)
     ,prevgamestate(State::Menu)
     ,background_color(sf::Color::Green)
 {
@@ -40,11 +42,22 @@ Game *Game::getInstance(){
 void Game::gameloop(){
     clock.restart();
     running = true;
+    sf::Event e;
     while(running){
+        while(window.pollEvent(e)){
+            if(e.type == sf::Event::EventType::Closed){
+                window.close();
+                running = false;
+                break;
+            }
+            EventDispatcher::getInstance()->dispatch(e);
+        }
         update();
         window.clear(background_color);
-        window.draw(*this);
-        running = false;
+        window.draw(*Game::getInstance());
+        window.display();
+        
+        //running = false;
     }
 }
 
@@ -57,7 +70,7 @@ void Game::update(){
     clock.restart();
     switch(gamestate){
         case State::Menu:
-
+            Menu::getInstance()->update(collapsed_time);
             break;
         case State::Game:
             Tetris::getInstance()->update(collapsed_time);
@@ -74,7 +87,7 @@ void Game::update(){
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const{
     switch(gamestate){
         case State::Menu:
-
+            target.draw(*Menu::getInstance());
             break;
         case State::Game:
             target.draw(*Tetris::getInstance());
