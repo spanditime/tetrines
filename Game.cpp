@@ -40,23 +40,29 @@ Game *Game::getInstance(){
 }
 
 void Game::gameloop(){
-    clock.restart();
     running = true;
     sf::Event e;
+    clock.restart();
     while(running){
         while(window.pollEvent(e)){
             if(e.type == sf::Event::EventType::Closed){
                 window.close();
                 running = false;
                 break;
+            } else{
+                if(e.type == sf::Event::EventType::Resized){
+                    sf::View v;
+                    v.setCenter(e.size.width/2,e.size.height/2);
+                    v.setSize(e.size.width,e.size.height);
+                    window.setView(v);
+                }
+                EventDispatcher::getInstance()->dispatch(e);
             }
-            EventDispatcher::getInstance()->dispatch(e);
         }
         update();
         window.clear(background_color);
         window.draw(*Game::getInstance());
         window.display();
-        
         //running = false;
     }
 }
