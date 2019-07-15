@@ -1,20 +1,26 @@
 
 EVENTSRC = Event/EventDispatcher.cpp Event/EventListener.cpp 
-GUISRC = GUI/Gui.cpp GUI/GuiElement.cpp
+GUIESRC = GUI/Elements/Button.cpp
+GUISRC = GUI/Gui.cpp GUI/GuiElement.cpp $(GUIESRC)
 
-SRC = main.cpp Game.cpp Tetris.cpp States.cpp $(EVENTSRC) $(GUISRC)
-OBJ = $(SRC:.cpp=.o)
+FSMSRC= Tetris.cpp Menu.cpp
+
+SRC = main.cpp Game.cpp States.cpp $(FSMSRC) $(EVENTSRC) $(GUISRC)
+OBJ = $(SRC:.cpp=.o)	
 NAME = Tetrines
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 LIBPATH = /usr/lib/x86_64-linux-gnu
 
-all: build rmo
- 
+all:
+	@echo "make install for start installation"
+
+install: build rmo
+
 build: $(OBJ)
-	g++ -Wall $(OBJ) -L$(LIBPATH) $(LIBS) -o $(NAME)
+	@g++ -g -Wall $(OBJ) -L$(LIBPATH) $(LIBS) -o $(NAME) && echo compile : succes
 
 .cpp.o:
-	g++ -c -Wall -I./ $< -o $@
+	g++ -g -c -Wall -I./ $< -o $@
 
-rmo:
-	find ./ -name "*.o" | xargs rm
+rmo: 
+	@find ./ -name "*.o" | xargs rm && echo object remove : succes
