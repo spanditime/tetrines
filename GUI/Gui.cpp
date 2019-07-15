@@ -81,6 +81,11 @@ void GUI::handleEvent(sf::Event e){
                     element->onHover();
                 }
                 element->mouseMoved(e.mouseMove.x,e.mouseMove.y);
+                if(focused != nullptr && focused != element){
+                    focused->focused = false;
+                    focused->lostFocus();
+                    focused = nullptr;
+                }
                 break;
             } else if(element->hover){
                 element->hover = false;
@@ -148,6 +153,7 @@ void GUI::handleEvent(sf::Event e){
                         focused = (*it);
                         focused->focused = true;
                         focused->onFocus();
+                        break;
                     }
                 }
                 break;
@@ -180,6 +186,7 @@ void GUI::handleEvent(sf::Event e){
                         focused = (*it);
                         focused->focused = true;
                         focused->onFocus();
+                        break;
                     }
                     it++;
                 }
