@@ -8,6 +8,7 @@
 #include "GuiElement.hpp"
 
 class GUI : public sf::Drawable , public EventListener {
+public:
     GUI(float w,float h);
     GUI(float w,float h,sf::FloatRect (*resize_handler)(float w,float h));
 
