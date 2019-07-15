@@ -30,6 +30,7 @@ void GUI::addElement(GuiElement* e){
         e->parrent->deleteElement(e);
     }
     e->parrent = this;
+    e->evaluateRect(field);
     childs.push_back(e);
 }
 
