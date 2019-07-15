@@ -86,7 +86,8 @@ bool GuiElement::isMousePressed(){
 sf::FloatRect GuiElement::getRect() const{
     return eval;
 }
-
+bool GuiElement::autoHandling() const{return false;}
+void GuiElement::handleEvent(sf::Event e){}
 void GuiElement::onHover(){}
 void GuiElement::onMouseLeave(){}
 void GuiElement::mouseMoved(float x, float y){}
