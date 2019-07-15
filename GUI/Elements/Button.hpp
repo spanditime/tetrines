@@ -35,6 +35,7 @@ private:
 
     sf::Color background_color, fill_color;
     sf::Vector2f circle;
+    sf::Vector2f circle_m;
     float circle_size;
     bool entered;
     void (*button_action)();
