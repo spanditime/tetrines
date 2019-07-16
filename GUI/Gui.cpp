@@ -63,6 +63,7 @@ void GUI::handleEvent(sf::Event e){
                 element->handleEvent(e);
             }
         }
+    bool res=false;
     switch(e.type){
     case sf::Event::EventType::Resized:
         field = resize_handler(e.size.width,e.size.height);
@@ -95,24 +96,22 @@ void GUI::handleEvent(sf::Event e){
         }
         break;
     case sf::Event::EventType::MouseButtonPressed:
-        if(true){
-            bool res=false;
-            for(auto element : childs){
-                if(res |= element->hover){
-                    element->mouse_pressed = element->mousePressed(e.mouseButton.x,e.mouseButton.y,e.mouseButton.button);
-                    if(element != focused && focused != nullptr){
-                        focused->focused = false;
-                        focused->lostFocus();
-                        focused = nullptr;
-                    }else
-                        break;
-                }
+        res=false;
+        for(auto element : childs){
+            if(res |= element->hover){
+                element->mouse_pressed = element->mousePressed(e.mouseButton.x,e.mouseButton.y,e.mouseButton.button);
+                if(element != focused && focused != nullptr){
+                    focused->focused = false;
+                    focused->lostFocus();
+                    focused = nullptr;
+                }else
+                    break;
             }
-            if(!res && focused != nullptr){
-                focused->focused = false;
-                focused->lostFocus();
-                focused = nullptr;
-            }
+        }
+        if(!res && focused != nullptr){
+            focused->focused = false;
+            focused->lostFocus();
+            focused = nullptr;
         }
         break;
     case sf::Event::EventType::MouseButtonReleased:
@@ -222,11 +221,11 @@ void GUI::handleEvent(sf::Event e){
                 break;
             }
         } else {
-            bool res = false;
+            res = false;
             switch(e.key.code){
-            case sf::Keyboard::Key::Up:
-            case sf::Keyboard::Key::PageUp:
-            case sf::Keyboard::Key::Left:
+            case sf::Keyboard::Key::Down:
+            case sf::Keyboard::Key::PageDown:
+            case sf::Keyboard::Key::Right:
                 for(auto element : childs){
                     if(element->hover&&element->canHaveFocus()){
                         element->focused = true;
@@ -253,9 +252,9 @@ void GUI::handleEvent(sf::Event e){
                 }
                 break;
 
-            case sf::Keyboard::Key::Down:
-            case sf::Keyboard::Key::PageDown:
-            case sf::Keyboard::Key::Right:
+            case sf::Keyboard::Key::Up:
+            case sf::Keyboard::Key::PageUp:
+            case sf::Keyboard::Key::Left:
                 for(auto element : childs){
                     if(element->hover&&element->canHaveFocus()){
                         element->focused = true;
