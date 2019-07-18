@@ -129,6 +129,20 @@ void GUI::handleEvent(sf::Event e){
             }
         }
         break;
+    case sf::Event::EventType::MouseLeft:
+        for(auto element : childs){
+            if(element->hover){
+                element->hover = false;
+            }
+        }
+        break;
+    case sf::Event::EventType::LostFocus:
+        if(focused != nullptr){
+            focused->focused = false;
+            focused->lostFocus();
+            focused = nullptr;
+        }
+        break;
     case sf::Event::EventType::KeyPressed:
         std::vector<GuiElement*>::iterator it;
         if(focused != nullptr){
@@ -147,6 +161,10 @@ void GUI::handleEvent(sf::Event e){
                 while(it != childs.begin()){
                     it--;
                     if((*it)->canHaveFocus()){
+                        if(focused->hover){
+                            focused->hover = false;
+                            focused->onMouseLeave();
+                        }
                         focused->focused = false;
                         focused->lostFocus();
                         focused = (*it);
@@ -160,6 +178,10 @@ void GUI::handleEvent(sf::Event e){
                 for(auto f = childs.begin();f != it;f++){
                     if((*f)->canHaveFocus()){
                         if(focused != nullptr){
+                            if(focused->hover){
+                                focused->hover = false;
+                                focused->onMouseLeave();
+                            }
                             focused->focused = false;
                             focused->lostFocus();
                             focused = nullptr;
@@ -180,6 +202,10 @@ void GUI::handleEvent(sf::Event e){
                 it++;
                 while(it != childs.end()){
                     if((*it)->canHaveFocus()){
+                        if(focused->hover){
+                            focused->hover = false;
+                            focused->onMouseLeave();
+                        }
                         focused->focused = false;
                         focused->lostFocus();
                         focused = (*it);
@@ -197,6 +223,10 @@ void GUI::handleEvent(sf::Event e){
                         break;
                     if((*f)->canHaveFocus()){
                         if(focused != nullptr){
+                            if(focused->hover){
+                                focused->hover = false;
+                                focused->onMouseLeave();
+                            }
                             focused->focused = false;
                             focused->lostFocus();
                             focused = nullptr;
@@ -243,6 +273,12 @@ void GUI::handleEvent(sf::Event e){
                 it = childs.begin();
                 while(it != childs.end()){
                     if((*it)->canHaveFocus()){
+                        for(auto element : childs){
+                            if(element->hover){
+                                element->hover = false;
+                                element->onMouseLeave();
+                            }
+                        }
                         (*it)->focused = true;
                         (*it)->onFocus();
                         focused = (*it);
@@ -273,6 +309,12 @@ void GUI::handleEvent(sf::Event e){
                 while(it != childs.begin()){
                     it--;
                     if((*it)->canHaveFocus()){
+                        for(auto element : childs){
+                            if(element->hover){
+                                element->hover = false;
+                                element->onMouseLeave();
+                            }
+                        }
                         (*it)->focused = true;
                         (*it)->onFocus();
                         focused = (*it);
