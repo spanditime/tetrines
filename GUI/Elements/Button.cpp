@@ -2,8 +2,8 @@
 
 #include <cmath>
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
+#include "GUI/Auxiliary/Auxiliary.hpp"
 
 void Button::default_button_action(){}
 
@@ -40,12 +40,8 @@ void Button::setCircleMoveSpeed(float speed){
         circle_m_speed = speed;
 }
 
-float evaluatLength(float x,float y){
-    return x+y;
-}
-
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const{
-    sf::FloatRect r =getRect();
+    sf::FloatRect r = getRect();
     sf::RectangleShape rect;
     rect.setPosition(sf::Vector2f(r.left,r.top));
     rect.setSize(sf::Vector2f(r.width,r.height));
@@ -53,7 +49,7 @@ void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const{
     sf::RenderTexture t;
     if(circle_size>0&&circle.x>=0&&circle.x<=1&&circle.y>=0&&circle.y<=1){
         t.create((int)(r.width+0.5f),(int)(r.height+0.5f));
-        float R=evaluatLength(r.width,r.height)/2.f*circle_size;
+        float R=aux::evaluateLength(r.width,r.height)/2.f*circle_size;
         sf::CircleShape shape(R,60L);
         shape.setPosition(r.width*circle.x-R,r.height*(1-circle.y)-R);
         shape.setFillColor(fill_color);
@@ -127,7 +123,6 @@ bool Button::mousePressed(float x, float y,sf::Mouse::Button b){
     circle_m.x = (x - r.left) / r.width;
     circle_m.y = (y - r.top) / r.height;
     if(b == sf::Mouse::Left){
-        std::cout<<"pressed"<<circle_size<<"\n";
         entered = true;
         return true;
     }
@@ -140,7 +135,7 @@ bool Button::mouseReleased(float x, float y,sf::Mouse::Button b){
         circle_m.x = (x - r.left) / r.width;
         circle_m.y = (y - r.top) / r.height;
     }
-    if(b == sf::Mouse::Left)
+    if(b == sf::Mouse::Left || !entered)
         return false;
     return true;
 }
