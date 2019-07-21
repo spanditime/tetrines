@@ -87,11 +87,9 @@ void GUI::handleEvent(sf::Event e){
                     focused->lostFocus();
                     focused = nullptr;
                 }
-                break;
             } else if(element->hover){
                 element->hover = false;
                 element->onMouseLeave();
-                break;
             }
         }
         break;
