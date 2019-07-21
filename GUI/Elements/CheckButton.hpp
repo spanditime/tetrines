@@ -43,6 +43,7 @@ private:
     float circle_m_speed;
     float circle_size;
     bool entered, state;
+    float state_m;
 };
 
 #endif // !GUI_ELEMENTS_CHECKBUTTON_HPP

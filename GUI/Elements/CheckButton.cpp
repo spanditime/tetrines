@@ -12,6 +12,7 @@ CheckButton::CheckButton(){
     circle_m_speed = 3.f;
     entered = false;
     state = false;
+    state_m = 0.f;
 }
 
 void CheckButton::setOnColor(sf::Color color){
@@ -45,17 +46,20 @@ void CheckButton::draw(sf::RenderTarget& target, sf::RenderStates states) const{
     vertices[1] = sf::Vertex(sf::Vector2f(0.f,0.f),on_color);
     vertices[6] = sf::Vertex(sf::Vector2f(r.width,r.height),off_color);
     vertices[7] = sf::Vertex(sf::Vector2f(r.width,0.f),off_color);
-    if(!entered != !state){
-        vertices[2] = sf::Vertex(sf::Vector2f(r.width/2.f,r.height),on_color);
-        vertices[3] = sf::Vertex(sf::Vector2f(r.width/2.f,0.f),on_color);
-        vertices[4] = sf::Vertex(sf::Vector2f(r.width-r.width/10.f,r.height),off_color);
-        vertices[5] = sf::Vertex(sf::Vector2f(r.width-r.width/10.f,0.f),off_color);
+    float left,right;
+    if(state_m<=0.5f){
+        left = 0.f;
+        right = state_m*state_m*4;
     }else{
-        vertices[2] = sf::Vertex(sf::Vector2f(r.width/10.f,r.height),on_color);
-        vertices[3] = sf::Vertex(sf::Vector2f(r.width/10.f,0.f),on_color);
-        vertices[4] = sf::Vertex(sf::Vector2f(r.width/2.f,r.height),off_color);
-        vertices[5] = sf::Vertex(sf::Vector2f(r.width/2.f,0.f),off_color);
+        left = std::sqrt((state_m-0.5f)*2.f);
+        right = 1.f;
     }
+    left *= 0.4f;
+    right *= 0.4f;
+    vertices[2] = sf::Vertex(sf::Vector2f(r.width/10.f+r.width*left,r.height),on_color);
+    vertices[3] = sf::Vertex(sf::Vector2f(r.width/10.f+r.width*left,0.f),on_color);
+    vertices[4] = sf::Vertex(sf::Vector2f(r.width/2.f+r.width*right,r.height),off_color);
+    vertices[5] = sf::Vertex(sf::Vector2f(r.width/2.f+r.width*right,0.f),off_color);
     sf::RenderTexture t;
     t.create((int)(r.width+0.5f),(int)(r.height+0.5f));
     t.draw(vertices,8,sf::TriangleStrip);
@@ -87,7 +91,15 @@ void CheckButton::update(float collapsed_time){
         circle_size += (collapsed_time*2.f);
         circle_size *= circle_size * 1.5f;
         circle_size += 0.5f;
+        if(state)
+            state_m = (circle_size - 0.5f)/1.5f;
+        else
+            state_m = 1 - (circle_size - 0.5f)/1.5f;
         if(circle_size>=2.f){
+            if(state)
+                state_m = 1.f;
+            else
+                state_m = 0.f;
             if(!mouseHovered()){
                 if(state)
                     circle.x = 0.75f;
