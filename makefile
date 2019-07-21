@@ -4,9 +4,10 @@ GUIEP = GUI/Elements
 GUIESRC = $(GUIEP)/Button.cpp $(GUIEP)/SwitchButton.cpp
 GUISRC = GUI/Gui.cpp GUI/GuiElement.cpp GUI/Auxiliary/Auxiliary.cpp $(GUIESRC)
 
-FSMSRC= Tetris.cpp Menu.cpp
+GSP = Game/
+GSSRC = $(GSP)States.cpp $(GSP)Style.cpp $(GSP)Tetris.cpp $(GSP)Menu.cpp
 
-SRC = main.cpp Game.cpp States.cpp Style.cpp $(FSMSRC) $(EVENTSRC) $(GUISRC)
+SRC = main.cpp Game.cpp $(GSSRC) $(EVENTSRC) $(GUISRC)
 OBJ = $(SRC:.cpp=.o)	
 NAME = Tetrines
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio

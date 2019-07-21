@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Drawable.hpp>
-#include "States.hpp"
+#include "Game/States.hpp"
 
 class Game : public sf::Drawable{
 // Concrette class pattern

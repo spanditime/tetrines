@@ -1,6 +1,6 @@
 #include "Game.hpp"
-#include "Tetris.hpp"
-#include "Menu.hpp"
+#include "Game/Tetris.hpp"
+#include "Game/Menu.hpp"
 #include "Event/EventDispatcher.hpp"
 
 #include <fstream>
