@@ -1,11 +1,11 @@
-#include "CheckButton.hpp"
+#include "SwitchButton.hpp"
 
 #include <cmath>
 #include <SFML/Graphics.hpp>
 
 #include "GUI/Auxiliary/Auxiliary.hpp"
 
-CheckButton::CheckButton(){
+SwitchButton::SwitchButton(){
     circle_size = 0;
     circle = {0.5f,0.5f};
     circle_m = {0.5f,0.5f};
@@ -15,28 +15,28 @@ CheckButton::CheckButton(){
     state_m = 0.f;
 }
 
-void CheckButton::setOnColor(sf::Color color){
+void SwitchButton::setOnColor(sf::Color color){
     on_color = color;
 }
 
-void CheckButton::setOffColor(sf::Color color){
+void SwitchButton::setOffColor(sf::Color color){
     off_color = color;
 }
 
-void CheckButton::setFillColor(sf::Color color){
+void SwitchButton::setFillColor(sf::Color color){
     fill_color = color;
 }
 
-void CheckButton::setText(std::string str){
+void SwitchButton::setText(std::string str){
     
 }
 
-void CheckButton::setCircleMoveSpeed(float speed){
+void SwitchButton::setCircleMoveSpeed(float speed){
     if(speed>0.1f)
         circle_m_speed = speed;
 }
 
-void CheckButton::draw(sf::RenderTarget& target, sf::RenderStates states) const{
+void SwitchButton::draw(sf::RenderTarget& target, sf::RenderStates states) const{
     sf::FloatRect r = getRect();
     sf::RectangleShape rect;
     rect.setPosition(sf::Vector2f(r.left,r.top));
@@ -75,7 +75,7 @@ void CheckButton::draw(sf::RenderTarget& target, sf::RenderStates states) const{
     target.draw(rect);
 }
 
-void CheckButton::update(float collapsed_time){
+void SwitchButton::update(float collapsed_time){
     if(isFocused() && !mouseHovered() && !entered){
         if(state)
             circle_m.x = 0.75f;
@@ -137,11 +137,11 @@ void CheckButton::update(float collapsed_time){
     }
 }
 
-void CheckButton::onHover(){
+void SwitchButton::onHover(){
 
 }
 
-void CheckButton::onMouseLeave(){
+void SwitchButton::onMouseLeave(){
     if(isFocused()){
         if(state)
             circle_m.x = 0.75f;
@@ -151,13 +151,13 @@ void CheckButton::onMouseLeave(){
     }
 }
 
-void CheckButton::mouseMoved(float x, float y){
+void SwitchButton::mouseMoved(float x, float y){
     sf::FloatRect r = getRect();
     circle_m.x = (x - r.left) / r.width;
     circle_m.y = (y - r.top) / r.height;
 }
 
-bool CheckButton::mousePressed(float x, float y,sf::Mouse::Button b){
+bool SwitchButton::mousePressed(float x, float y,sf::Mouse::Button b){
     sf::FloatRect r = getRect();
     circle_m.x = (x - r.left) / r.width;
     circle_m.y = (y - r.top) / r.height;
@@ -169,7 +169,7 @@ bool CheckButton::mousePressed(float x, float y,sf::Mouse::Button b){
     return false;
 }
 
-bool CheckButton::mouseReleased(float x, float y,sf::Mouse::Button b){
+bool SwitchButton::mouseReleased(float x, float y,sf::Mouse::Button b){
     sf::FloatRect r = getRect();
     if(r.left>=x&&r.left+r.width<=x&&r.top>=y&&r.top+r.height<=y){
         circle_m.x = (x - r.left) / r.width;
@@ -180,11 +180,11 @@ bool CheckButton::mouseReleased(float x, float y,sf::Mouse::Button b){
     return true;
 }
 
-bool CheckButton::canHaveFocus() const{
+bool SwitchButton::canHaveFocus() const{
     return true;
 }
 
-void CheckButton::onFocus(){
+void SwitchButton::onFocus(){
     if(!mouseHovered()){
         if(state)
             circle_m.x = 0.75f;
@@ -194,18 +194,18 @@ void CheckButton::onFocus(){
     }
 }
 
-void CheckButton::lostFocus(){
+void SwitchButton::lostFocus(){
 
 }
 
-void CheckButton::onReturn(){
+void SwitchButton::onReturn(){
     if(!entered){
         entered = true;
         state = !state;
     }
 }
 
-bool CheckButton::leftArrow(){
+bool SwitchButton::leftArrow(){
     if(entered)
         return true;
     if(state){
@@ -216,7 +216,7 @@ bool CheckButton::leftArrow(){
     return false;
 }
 
-bool CheckButton::rightArrow(){
+bool SwitchButton::rightArrow(){
     if(entered)
         return true;
     if(!state){

@@ -1,7 +1,7 @@
 
 EVENTSRC = Event/EventDispatcher.cpp Event/EventListener.cpp 
 GUIEP = GUI/Elements
-GUIESRC = $(GUIEP)/Button.cpp $(GUIEP)/CheckButton.cpp
+GUIESRC = $(GUIEP)/Button.cpp $(GUIEP)/SwitchButton.cpp
 GUISRC = GUI/Gui.cpp GUI/GuiElement.cpp GUI/Auxiliary/Auxiliary.cpp $(GUIESRC)
 
 FSMSRC= Tetris.cpp Menu.cpp

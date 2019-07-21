@@ -1,5 +1,5 @@
-#ifndef GUI_ELEMENTS_CHECKBUTTON_HPP
-#define GUI_ELEMENTS_CHECKBUTTON_HPP
+#ifndef GUI_ELEMENTS_SWITCHBUTTON_HPP
+#define GUI_ELEMENTS_SWITCHBUTTON_HPP
 
 #include <SFML/Graphics/Color.hpp>
 #include <string>
@@ -7,9 +7,9 @@
 #include "GUI/GuiElement.hpp"
 
 
-class CheckButton : public GuiElement{
+class SwitchButton : public GuiElement{
 public:
-    CheckButton();
+    SwitchButton();
 
     void setOnColor(sf::Color color=sf::Color::Green);
     void setOffColor(sf::Color color=sf::Color::Red);
@@ -46,4 +46,4 @@ private:
     float state_m;
 };
 
-#endif // !GUI_ELEMENTS_CHECKBUTTON_HPP
+#endif // !GUI_ELEMENTS_SWITCHBUTTON_HPP
