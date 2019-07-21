@@ -76,7 +76,7 @@ void GUI::handleEvent(sf::Event e){
             sf::FloatRect r = element->getRect();
             r.left = e.mouseMove.x - r.left;
             r.top = e.mouseMove.y - r.top;
-            if(r.left<=r.width&&r.left>=0&&r.top<=r.height&&r.top>=0){
+            if(r.left<=r.width&&r.left>=0&&r.top<=r.height&&r.top>=0&&element->handleMouse()){
                 if(!element->hover){
                     element->hover = true;
                     element->onHover();

@@ -88,6 +88,7 @@ sf::FloatRect GuiElement::getRect() const{
 }
 bool GuiElement::autoHandling() const{return false;}
 void GuiElement::handleEvent(sf::Event e){}
+bool GuiElement::handleMouse(){return false;}
 void GuiElement::onHover(){}
 void GuiElement::onMouseLeave(){}
 void GuiElement::mouseMoved(float x, float y){}

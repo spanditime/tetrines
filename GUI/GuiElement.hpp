@@ -37,6 +37,7 @@ protected:
 private:
     virtual bool autoHandling() const;
     virtual void handleEvent(sf::Event e);
+    virtual bool handleMouse();
     virtual void onHover();
     virtual void onMouseLeave();
     virtual void mouseMoved(float x, float y);

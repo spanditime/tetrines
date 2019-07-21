@@ -101,6 +101,10 @@ void Button::update(float collapsed_time){
     }
 }
 
+bool Button::handleMouse(){
+    return true;
+}
+
 void Button::onHover(){
 
 }

@@ -23,6 +23,7 @@ private:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     void update(float collapsed_time);
 
+    bool handleMouse();
     void onHover();
     void onMouseLeave();
     void mouseMoved(float x, float y);

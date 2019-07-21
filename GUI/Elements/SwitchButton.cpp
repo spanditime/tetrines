@@ -137,6 +137,10 @@ void SwitchButton::update(float collapsed_time){
     }
 }
 
+bool SwitchButton::handleMouse(){
+    return true;
+}
+
 void SwitchButton::onHover(){
 
 }
