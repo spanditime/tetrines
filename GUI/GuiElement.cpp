@@ -59,9 +59,11 @@ sf::FloatRect GuiElement::evaluateRect(const sf::FloatRect& p){
     if(in_perc.left){
         eval.left = (rect.left/100.f)*p.width;
     }
+    eval.left += p.left;
     if(in_perc.top){
         eval.top = (rect.top/100.f)*p.height;
     }
+    eval.top += p.top;
     if(in_perc.width){
         eval.width = (rect.width/100.f)*p.width;
     }
