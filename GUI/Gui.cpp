@@ -10,8 +10,8 @@ GUI::GUI(float w,float h){
     focused = nullptr;
 }
 
-GUI::GUI(float w,float h,sf::FloatRect (*resize_handler)(float w,float h)){
-    resize_handler = resize_handler;
+GUI::GUI(float w,float h,sf::FloatRect (*handler)(float w,float h)){
+    resize_handler = handler;
     field = resize_handler(w,h);
 }
 
